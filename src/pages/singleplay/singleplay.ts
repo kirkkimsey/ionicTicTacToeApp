@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 
 /**
@@ -16,9 +16,13 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 export class SingleplayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
+  // squares = Array(9).fill(null);
+  squares: [any][any];
   ionViewDidLoad() {
     console.log("ionViewDidLoad SingleplayPage");
   }
+  move(position) {}
+
   restart() {
     console.log("Restart Clicked");
   }

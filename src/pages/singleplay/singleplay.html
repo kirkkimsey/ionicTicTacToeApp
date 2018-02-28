@@ -22,7 +22,7 @@
   <ion-card>
     <div class="board" *ngFor="let row of [0,1,2]">
       <div *ngFor="let col of [0,1,2]">
-        <div class="cell"></div>
+        <div class="cell" (click)="move(row,col)">{{squares[row][col]}}</div>
       </div>
     </div>
   </ion-card>

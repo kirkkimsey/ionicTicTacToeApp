@@ -52,7 +52,7 @@ export class WelcomePage {
     actionSheet.present();
   }
   highScore() {
-    console.log("High Score Clicked");
+    this.navCtrl.push("HighscorePage");
   }
   exit() {
     console.log("Exit Clicked");

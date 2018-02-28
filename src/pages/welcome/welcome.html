@@ -13,8 +13,12 @@
 </ion-header>
 
 
-<ion-content padding>
-  <button ion-button block color="secondary" (click)="play()">Play</button>
-  <button ion-button block color="default" (click)="highScore()">High Score</button>
-  <button ion-button block color="danger" (click)="exit()">Exit</button>
+<ion-content padding class="welcomeMenu">
+  <ion-grid>
+    <ion-row align-items-center>
+      <button ion-button block color="secondary" (click)="play()">Play</button>
+      <button ion-button block color="default" (click)="highScore()">High Score</button>
+      <button ion-button block color="danger" (click)="exit()">Exit</button>
+    </ion-row>
+  </ion-grid>
 </ion-content>
