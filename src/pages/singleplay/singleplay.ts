@@ -15,15 +15,15 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 })
 export class SingleplayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  // squares = Array(9).fill(null);
-  squares: [any][any];
+  //this.squares = Array(9).fill(null);
+  squares = [["", "", ""], ["", "", ""], ["", "", ""]];
+  player = "X";
   ionViewDidLoad() {
     console.log("ionViewDidLoad SingleplayPage");
   }
-  move(position) {}
-
-  restart() {
-    console.log("Restart Clicked");
+  move(row, col) {
+    if (!this.squares[row][col]) {
+      this.squares[row][col] = this.player;
+    }
   }
 }

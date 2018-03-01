@@ -22,11 +22,8 @@
   <ion-card>
     <div class="board" *ngFor="let row of [0,1,2]">
       <div *ngFor="let col of [0,1,2]">
-        <div class="cell" (click)="move(row,col)">{{squares[row][col]}}</div>
+        <button class="cell" (click)="move(row,col)">{{squares[row][col]}}</button>
       </div>
     </div>
   </ion-card>
-  <button ion-button block color="secondary" (click)="restart()">Restart</button>
-
-
-</ion-content>
+  <button ion-button block color="secondary">Restart</button>
