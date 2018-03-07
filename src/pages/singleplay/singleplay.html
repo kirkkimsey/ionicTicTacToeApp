@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-card>
     <ion-item>
-      Score
+      {{gameStatusMessage}}
     </ion-item>
   </ion-card>
   <ion-card>
@@ -26,4 +26,4 @@
       </div>
     </div>
   </ion-card>
-  <button ion-button block color="secondary">Restart</button>
+  <button ion-button block color="secondary" (click)="restartGame()">Restart</button>
