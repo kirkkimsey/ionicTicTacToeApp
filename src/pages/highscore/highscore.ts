@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams } from "ionic-angular";
 
 /**
  * Generated class for the HighscorePage page.
@@ -10,16 +10,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-highscore',
-  templateUrl: 'highscore.html',
+  selector: "page-highscore",
+  templateUrl: "highscore.html"
 })
 export class HighscorePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  xScore: string;
+  oScore: string;
+  scores = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  ionViewWillLoad() {
+    this.scores = [
+      (this.xScore = this.navParams.get("xScore")),
+      (this.oScore = this.navParams.get("oScore"))
+    ];
   }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HighscorePage');
+    console.log("ionViewDidLoad HighscorePage");
   }
-
 }

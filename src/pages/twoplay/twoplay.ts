@@ -1,13 +1,14 @@
-import { Component, Input } from "@angular/core";
+import { Component } from "@angular/core";
 import {
   IonicPage,
   NavController,
   NavParams,
   AlertController
 } from "ionic-angular";
+import { WelcomePage } from "../welcome/welcome";
 
 /**
- * Generated class for the SingleplayPage page.
+ * Generated class for the TwoplayPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -15,10 +16,18 @@ import {
 
 @IonicPage()
 @Component({
-  selector: "page-singleplay",
-  templateUrl: "singleplay.html"
+  selector: "page-twoplay",
+  templateUrl: "twoplay.html"
 })
-export class SingleplayPage {
+export class TwoplayPage {
+  squares = Array(9).fill(null);
+  mark: any;
+  chooser: String;
+  emptySquares = [];
+  winner = null;
+  xScore = 0;
+  oScore = 0;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,7 +36,7 @@ export class SingleplayPage {
 
   ionViewWillEnter() {
     let chooser = this.alertCtrl.create({
-      title: "Choose Your Player:",
+      title: "Player 1, Choose Your Mark",
       buttons: [
         {
           text: "X",
@@ -48,14 +57,6 @@ export class SingleplayPage {
     chooser.present();
   }
 
-  //this.squares = Array(9).fill(null);
-  mark: any;
-  chooser: String;
-  msg: String;
-  squares = [["", "", ""], ["", "", ""], ["", "", ""]];
-  emptySquares = [];
-  random: any;
-  winner = null;
   ionViewDidLoad() {
     console.log("ionViewDidLoad SingleplayPage");
   }
@@ -69,35 +70,48 @@ export class SingleplayPage {
     this.mark = this.chooser;
   }
 
-  move(row, col) {
-    if (!this.winner && !this.squares[row][col]) {
-      this.squares[row][col] = this.mark;
+  move(position) {
+    if (!this.winner && !this.squares[position]) {
+      this.squares[position] = this.mark;
       if (this.checkRow()) {
         this.winner = this.mark;
+        if ((this.winner = this.mark === "X")) {
+          this.xScore++;
+        } else {
+          this.oScore++;
+        }
+        this.winningMessage();
       }
+      this.mark = this.mark === "X" ? "O" : "X";
       this.checkRow();
-      this.switchMark();
-      this.computerMove(row, col);
-    }
-  }
-  computerMove(row, col) {
-    this.emptySquares;
-    this.random;
-    if (this.squares[row][col]) {
-      this.random = Math.ceil(Math.random() * this.squares[row][col].length);
-      this.squares[this.random] = this.mark;
-      this.checkRow();
-      this.switchMark();
     }
   }
 
-  switchMark() {
-    if ((this.mark = "X")) {
-      this.mark = "O";
-    } else {
-      this.mark = "X";
-    }
+  winningMessage() {
+    let winningAlert = this.alertCtrl.create({
+      title: `Player ${this.winner} has won!`,
+      subTitle: `Would you like to play again?`,
+      buttons: [
+        {
+          text: "Yes",
+          handler: data => {
+            this.restartGame();
+          }
+        },
+        {
+          text: "No",
+          handler: () => {
+            this.navCtrl.push(WelcomePage, {
+              xScore: this.xScore,
+              oScore: this.oScore
+            });
+          }
+        }
+      ]
+    });
+    winningAlert.present();
   }
+
   checkRow() {
     const conditions = [
       [0, 1, 2],
@@ -122,7 +136,27 @@ export class SingleplayPage {
   }
   restartGame() {
     this.squares = Array(9).fill(null);
-    this.mark = "";
+    this.mark = "X";
     this.winner = null;
+    let chooser = this.alertCtrl.create({
+      title: "Player 1, Choose Your Mark",
+      buttons: [
+        {
+          text: "X",
+          handler: data => {
+            this.chooser = "X";
+            this.setPlayer();
+          }
+        },
+        {
+          text: "O",
+          handler: data => {
+            this.chooser = "O";
+            this.setPlayer();
+          }
+        }
+      ]
+    });
+    chooser.present();
   }
 }

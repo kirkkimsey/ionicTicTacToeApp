@@ -16,6 +16,8 @@ import { SingleplayPage } from "../singleplay/singleplay";
   templateUrl: "welcome.html"
 })
 export class WelcomePage {
+  oScore: string;
+  xScore: string;
   constructor(
     private navCtrl: NavController,
     private navParams: NavParams,
@@ -24,6 +26,8 @@ export class WelcomePage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad WelcomePage");
+    this.xScore = this.navParams.get("xScore");
+    this.oScore = this.navParams.get("oScore");
   }
   play() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -37,7 +41,7 @@ export class WelcomePage {
         {
           text: "Two Player",
           handler: () => {
-            console.log("Two Player Clicked");
+            this.navCtrl.push("TwoplayPage");
           }
         },
         {
@@ -52,7 +56,10 @@ export class WelcomePage {
     actionSheet.present();
   }
   highScore() {
-    this.navCtrl.push("HighscorePage");
+    this.navCtrl.push("HighscorePage", {
+      xScore: this.xScore,
+      oScore: this.oScore
+    });
   }
   exit() {
     console.log("Exit Clicked");

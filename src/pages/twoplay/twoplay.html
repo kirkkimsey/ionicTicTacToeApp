@@ -1,0 +1,42 @@
+<!--
+  Generated template for the TwoplayPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>twoplay</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-title>Score</ion-title>
+    <ion-item>
+      Player X: {{xScore}}
+      <br> Player O: {{oScore}}
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <div class="board" *ngFor="let row of [0,1,2]">
+      <div *ngFor="let col of [0,1,2]">
+        <button class="cell" (click)="move(col+row*3)">{{squares[col+row*3]}}</button>
+      </div>
+    </div>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      {{gameStatusMessage}}
+    </ion-item>
+  </ion-card>
+  <button ion-button block color="secondary" (click)="restartGame()">Restart</button>
+
+
+
+</ion-content>
